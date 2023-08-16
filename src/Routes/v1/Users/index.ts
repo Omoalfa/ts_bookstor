@@ -20,7 +20,6 @@ class UserRouter implements Routes {
   public router: Router;
 
   private initializeRoutes () {
-    this.router.post('/waiting', this.userValidator.joinWaitingListValidator, this.userController.joinWaitingList);
     this.router.get('/google', this.userController.getGoogleUrl);
     this.router.post('/google', this.userController.googleAuth);
     this.router.post('/', this.userValidator.signupValidator, this.userController.signup);

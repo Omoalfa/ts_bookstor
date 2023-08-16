@@ -10,6 +10,7 @@
     "migrate:rollback": "knex --knexfile src/Database/knexfile.ts migrate:rollback",
     "seed:make": "knex --knexfile src/Database/knexfile.ts seed:make",
     "seed:run": "knex --knexfile src/Database/knexfile.ts seed:run",
+    "prestart": "npm run migrate:latest",
     "start": "cross-env NODE_OPTIONS=--max-old-space-size=400 ts-node -r tsconfig-paths/register --transpile-only index.ts",
     "dev": "nodemon",
     "test": "cross-env NODE_ENV=test npm run migrate:latest && cross-env NODE_ENV=test ts-mocha --paths -p ./tsconfig.json test/**/*.spec.ts"

@@ -9,16 +9,6 @@ class UserAdapter extends BaseAdapter {
     super()
   }
 
-  public DBJoinWaitingList = async (data: { email: string, nickname: string }) => {
-    try {
-      const user = await knex.table(ETables.WAITLIST).insert({ ...data, is_waiting: true }).returning('*')
-
-      return user;
-    } catch (error) {
-      return this.catchError(error);
-    }
-  }
-
   public DBGetUserAndPassword = async (email: string) => {
     try {
       const user = await knex.select(["email", "id"]).from(ETables.USER).where("email", email).first();
@@ -52,15 +42,6 @@ class UserAdapter extends BaseAdapter {
 export class UserValidatorAdapter extends BaseAdapter {
   constructor () {
     super();
-  }
-  public DBIsEmailPresentInWailist = async (email: string) => {
-    try {
-      const user = await knex.select("*").from(ETables.WAITLIST).where("email", email).first();
-
-      return user;
-    } catch (error) {
-      return this.catchError(error);
-    }
   }
 
   public DBGetUserAndPassword = async (email: string) => {

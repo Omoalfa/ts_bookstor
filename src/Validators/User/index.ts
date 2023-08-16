@@ -12,26 +12,6 @@ class UserValidations extends Validator {
     super()
   }
 
-  public joinWaitingListValidator = this.validate({
-    email: {
-      in: ["body"],
-      isEmail: true,
-      custom: {
-        options: async (email) => {
-          const user = await this.userAdapter.DBIsEmailPresentInWailist(email);
-
-          console.log(user);
-          if (user) throw new Error("You have already joined the waiting list...")
-        }
-      }
-    },
-    nickname: {
-      in: ["body"],
-      isString: true,
-      notEmpty: true
-    },
-  })
-
   public loginValidator = this.validate({
     email: {
       in: ["body"],
@@ -74,6 +54,11 @@ class UserValidations extends Validator {
       in: ["body"],
       isString: true,
       isLength: { options: { min: 8 }},
+    },
+    name: {
+      in: ["body"],
+      isString: true,
+      notEmpty: true,
     }
   })
 

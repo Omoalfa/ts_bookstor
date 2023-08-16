@@ -9,5 +9,5 @@
       "src/logs/*",
       "src/**/*.{spec,test}.ts"
   ],
-  "exec": "cross-env NODE_OPTIONS=--max-old-space-size=400 ts-node -r tsconfig-paths/register --transpile-only ./index.ts"
+  "exec": "npm run migrate:latest && cross-env NODE_OPTIONS=--max-old-space-size=400 ts-node -r tsconfig-paths/register --transpile-only ./index.ts"
 }

@@ -1,17 +1,15 @@
-import { config } from 'dotenv';
-
-config({ path: './../../.env' })
+import { DB_URL, DB_HOST, DB_NAME, DB_PASS, DB_PORT, DB_USER } from "../Config/migration";
 
 const knexConfig = {
   client: 'pg',
-  connection: process.env.DB_URL 
+  connection: DB_URL 
   ?? 
   { 
-    user: process.env.DB_USER, 
-    password: process.env.DB_PASS, 
-    database: process.env.DB_NAME, 
-    host: process.env.DB_HOST, 
-    port: process.env.DB_PORT 
+    user: DB_USER, 
+    password: DB_PASS, 
+    database: DB_NAME, 
+    host: DB_HOST, 
+    port: DB_PORT 
   },
   pool: {
     min: 2,
@@ -26,7 +24,8 @@ const knexConfig = {
     directory: 'seeds',
     extensions: 'ts'
   },
-  timezone: 'UTC'
+  timezone: 'UTC',
+  ssl: true
 };
 
 export default knexConfig;

@@ -12,7 +12,6 @@ const scopes = [
   'https://www.googleapis.com/auth/userinfo.email',
   'https://www.googleapis.com/auth/profile.emails.read',
   'https://www.googleapis.com/auth/user.gender.read',
-  'https://www.googleapis.com/auth/user.phonenumbers.read',
   'https://www.googleapis.com/auth/userinfo.profile'
 ];
 
@@ -36,27 +35,23 @@ export const getUserProfile = async (code: string) => {
   const { data } = await google.people('v1').people.get({
     resourceName: 'people/me',
     access_token: tokens.access_token,
-    personFields: 'emailAddresses,genders,photos,names,phoneNumbers',
+    personFields: 'emailAddresses,genders,names',
   })
 
   const name = data.names?.find(name => name.metadata.primary);
   const email = data.emailAddresses?.find(email => email.metadata.primary)?.value
-  const phoneNumber = data.phoneNumbers?.find(phone => phone.metadata.primary)?.value
-  // const photo = data.photos.find(photo => photo.metadata.primary).url
   const gender = data.genders?.find(gender => gender.metadata.primary)?.value
 
   return {
-    first_name: name?.givenName,
-    last_name: name?.familyName,
+    name: name.displayName,
     email,
-    phone: phoneNumber,
-    // avatar: photo,
-    // gender
+    gender,
   }
 }
 
 export const pinGenerator = (l: number): string => {
-  const value = Math.floor((10 ^ l) + Math.random() * (9 * (10 ^ l)));
+  const p = l - 1;
+  const value = Math.floor(Math.pow(10, p) + Math.random() * (9 * Math.pow(10, p)));
 
   return value.toString();
 };

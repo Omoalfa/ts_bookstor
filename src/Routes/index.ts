@@ -1,5 +1,5 @@
 import { Service } from "typedi";
-import UserRouter from "./v1/User";
+import UserRouter from "./v1/Users";
 import { Router } from "express";
 import { Routes } from "@/Interfaces/router";
 

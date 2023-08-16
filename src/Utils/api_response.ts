@@ -4,7 +4,6 @@ import { logger } from "@/Logger";
 
 interface Paginated<T> {
   list: T,
-  page: number,
   pageTag: string,
   limit: number,
   total: number,

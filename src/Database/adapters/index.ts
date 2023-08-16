@@ -17,7 +17,8 @@ const knexConfig = {
     min: 2,
     max: 10
   },
-  timezone: 'UTC'
+  timezone: 'UTC',
+  ssl: true
 }
 
 const knex = knexObject(knexConfig);

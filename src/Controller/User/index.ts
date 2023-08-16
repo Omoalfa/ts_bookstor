@@ -32,14 +32,14 @@ class UserController extends BaseController {
   }
 
   public signup = async (req: Request, res: Response) => {
-    const { email, first_name, last_name, password: raw } = req.body;
+    const { email, name, password: raw } = req.body;
 
     try {
       const password = bcrypt.hashSync(raw, 10);
       const verification_code = pinGenerator(4);
 
       const user = this.userAdapter.DBCreateUser({
-        email, first_name, last_name, password, verification_code
+        email, name, password, verification_code
       })
 
       const mailContent = `
